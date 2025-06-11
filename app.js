@@ -7,8 +7,13 @@ const app = express();
 const server = http.createServer(app);
 const io = socketIo(server);
 
+const markers = {};
+
 io.on("connection", function (socket) {
+  socket.emit("all-markers", markers);
+
   socket.on("send-location", function (data) {
+    markers[socket.id] = { id: socket.id, ...data }; 
     io.emit("recieve-location", {
       id: socket.id,
       ...data,
@@ -16,6 +21,7 @@ io.on("connection", function (socket) {
   });
 
   socket.on("disconnect", function () {
+    delete markers[socket.id];
     io.emit("user-disconnected", socket.id);
   });
 });

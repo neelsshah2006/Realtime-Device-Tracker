@@ -24,6 +24,16 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
 
 const markers = {};
 
+socket.on("all-markers", (allMarkers) => {
+  Object.values(allMarkers).forEach(({ id, latitude, longitude }) => {
+    if (!markers[id]) {
+      markers[id] = L.marker([latitude, longitude]).addTo(map);
+    } else {
+      markers[id].setLatLng([latitude, longitude]);
+    }
+  });
+});
+
 socket.on("recieve-location", (data) => {
   const { id, latitude, longitude } = data;
   map.setView([latitude, longitude], 16);
