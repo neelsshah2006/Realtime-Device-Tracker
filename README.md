@@ -31,8 +31,8 @@ A real-time device tracking web application built with Node.js, Express, Socket.
 1. **Clone the repository:**
 
    ```sh
-   git clone https://github.com/yourusername/realtime-device-tracker.git
-   cd realtime-device-tracker
+   git clone https://github.com/neelsshah2006/Realtime-Device-Tracker
+   cd Realtime-Device-Tracker
    ```
 
 2. **Install dependencies:**
